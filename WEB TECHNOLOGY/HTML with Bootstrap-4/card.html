@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/bootstrap.min.css">
+  <style>
+    .bg-dar {
+      background: url("./effil.jpg");
+    }
+
+    body {
+      background: url("./effil.jpg")
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark text-secondary sticky-top">
+    <a class="navbar-brand" href="#">M<span class="bg-warning">Y T</span>rip</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <div>
+        <ul class="navbar-nav">
+          <li class="nav-item active">
+            <a class="nav-link" href="./Assignment1.html">Home<span class="sr-only">(current)</span></a>
+          </li>
+      </div>
+      <ul class="navbar-nav ml-sm-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="./registration.html" tabindex="-1" aria-disabled="true">Register</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container d-flex justify-content-center">
+    <div class="card col-md-4 mt-4">
+      <div class="card-body">
+        <h1 class="h1 text-center">Login</h1>
+        <form action="#" method="POST">
+          <div class="form-group">
+            <label for="un">UserName</label>
+            <input type="text" class="form-control" placeholder="UserName" id="un">
+          </div>
+          <div>
+            <label for="ps">Password</label>
+            <input type="password" class="form-control" placeholder="Password" id="ps">
+          </div>
+        </form>
+        <div class="form-group">
+          <button class="btn btn-primary btn-block mt-4" style="letter-spacing:2px;">Login</button>
+        </div>
+        <div>
+          <a href="./registration.html" style="text-decoration: none;"><button class="btn btn-secondary btn-block"
+              style="letter-spacing:2px; margin-top: -10px">Register</button></a>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</body>
+
+</html>

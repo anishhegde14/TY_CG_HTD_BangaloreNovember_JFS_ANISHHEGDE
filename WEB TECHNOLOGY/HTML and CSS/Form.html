@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registration</title>
+    <style>
+            *{
+                text-decoration: none;
+            }
+            body{
+                background:url("./143732.jpg");
+                background-size: cover;
+            }
+            .nav1 ul li{
+                list-style: none;
+                display: inline;
+                padding: 20px;
+            }
+            .nav1{
+                width: 50%;
+                margin-right: none;
+                padding: 10px;
+                
+            }
+            .nav2 ul li{
+                display: inline;
+                list-style: none;
+                padding: 20px;
+            }
+            .nav2{
+                width: 50%;
+                text-align: end;
+                float: right;
+                margin-top: -71px;
+                padding: 10px;
+            }
+    h2{
+        color: red;
+    }
+
+    div{
+        text-align: center;
+        border: 1px solid black;
+        width: 350px;
+        margin-left: 40%;
+        margin-top: 2%;
+    }
+    div form input{
+        margin: 10px;
+    }
+    </style>
+</head>
+<body>
+        <nav  class="nav1">
+                <ul>
+                    <li><a href="#" name="home">Home</a></li>
+                    <li><a href="#" name="home">About</a></li>
+                    <li><a href="#" name="home">Gallery</a></li>
+                </ul>
+                </nav>
+                <nav class="nav2">
+                <ul>
+                    <li><a href="./login.html" target="_blank" name="home">Login</a></li>
+                    <li><a href="./Form.html" target="_blank" name="home">Register</a></li>
+                </ul>
+        </nav>
+    <div>
+    <header>
+        <h2>Registration Form</h2>
+    </header>
+    <section>
+        <form action="#" method="POST">
+            <label for="mr">Mr</label>
+            <input type="radio" name="mr" id="mr">
+            <label for="mr1">Mrs</label>
+            <input type="radio" name="mr" id="mr1">
+            <label for="mr2">Ms</label>
+            <input type="radio" name="mr" id="mr2">
+            <br>
+            <label for="f">First name</label>
+            <input type="text" name="fname" id="f" placeholder="First name">
+            <br>
+            <label for="f">Last name</label>
+            <input type="text" name="lname" id="f" placeholder="last name">
+            <br>
+            <label for="tx">address line 1</label>
+            <textarea name="address" id="f" cols="30" rows="2"></textarea>
+            <br>
+            <label for="tx1">address line 2 </label>
+            <textarea name="address2" id="f" cols="30" rows="2"></textarea>
+            <br>
+            <label for="city">City</label>
+            <input type="text" name="city" id="f">
+            <br>
+            State <input list="f">
+            <datalist id="f">
+                <option value="karnataka">karnataka</option>
+                <option value="kerela">kerela</option>
+            </datalist>
+            <br>
+            <label for="zip">Zip</label>
+            <input type="text" name="zip" id="zip">
+            <br>
+            <label for="upload">Upload photo</label>
+            <input type="file" name="upload" id="upload">
+            <br>
+            <label for="e">Email</label>
+            <input type="email" name="mail" id="e">
+            <br>
+            <label for="n">Mobile</label>
+            <input type="text" name="num" id="n">
+            <br>
+            <label for="lang">Languages known</label>
+            <br>
+            Hindi <input type="checkbox" name="lang" id="lang">
+            <br>
+           English <input type="checkbox" name="lang" id="lang">
+           <br>
+           <button>Submit</button>
+           <input type="reset" name="resetbt">
+
+        </form>
+    </section>
+    </div>
+</body>
+</html>
