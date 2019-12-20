@@ -1,0 +1,26 @@
+span{
+
+
+    background: red;
+    height: 100px;
+    width: 200px;
+    display: block;
+}
+#div1{
+
+
+    background: red;
+    height:200px ;
+    width: 50%;
+    float: left;
+
+}
+#div2{
+
+
+    background:greenyellow;
+    height:200px ;
+    width: 50%;
+    float: left;
+
+}
