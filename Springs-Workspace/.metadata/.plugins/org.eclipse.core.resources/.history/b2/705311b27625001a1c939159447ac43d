@@ -1,0 +1,5 @@
+package com.capgemini.springwebapp.config;
+
+public class ORMConfig {
+
+}

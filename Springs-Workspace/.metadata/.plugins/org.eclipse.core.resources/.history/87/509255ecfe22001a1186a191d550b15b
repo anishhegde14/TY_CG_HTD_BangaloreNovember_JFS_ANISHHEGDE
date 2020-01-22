@@ -1,0 +1,40 @@
+package com.capgemini.springcore.beans;
+
+public class Hello {
+
+	
+	public Hello() {System.out.println("Object Created");}
+	public Hello(String message, int count) {
+		this.message = message;
+		this.count = count;
+		
+	}
+
+	private String message;
+	private int count;
+	public void init()
+	{
+		System.out.println("Init method");
+	}
+	public void destroy()
+	{
+		System.out.println("Destroy method");
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
+}

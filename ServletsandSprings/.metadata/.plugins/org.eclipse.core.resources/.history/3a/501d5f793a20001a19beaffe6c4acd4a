@@ -1,0 +1,45 @@
+package com.capgemini.mywebapp.servlets;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.capgemini.mywebapp.bean.EmployeeInfoBean;
+import com.capgemini.mywebapp.service.EmployeeService;
+import com.capgemini.mywebapp.service.EmployeeServiceImpl;
+@WebServlet("/searchEmployee")
+public class SearchEmployeeServlet extends HttpServlet{
+	
+	private EmployeeService e=new EmployeeServiceImpl();
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+	String empIdVal=req.getParameter("empid");
+	int empId=Integer.parseInt(empIdVal);
+	EmployeeInfoBean eib=e.searchEmployee(empId);
+	resp.setContentType("text/html");
+	PrintWriter pw=resp.getWriter();
+	pw.println("<html>");
+	pw.println("<body>");
+	if(eib!=null)
+	{
+		pw.println("<h3> Employee ID found"+empId+"!!!<br>");
+		pw.println(eib.getName());
+		pw.println(eib.getSalary());
+		pw.println(eib.getDesignation());
+		pw.println(eib.getAge());
+	}else
+	{
+	pw.println("<h3 style='color:red>EmployeeID"+empId+"Not Found");
+	req.getRequestDispatcher("./LoginPage.html").include(req, resp);
+	}
+	pw.println("</html>");
+	pw.println("</body>");
+	}
+
+}

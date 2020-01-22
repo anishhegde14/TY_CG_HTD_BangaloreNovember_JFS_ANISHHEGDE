@@ -1,0 +1,36 @@
+package com.capgemini.springwebapp.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.capgemini.springwebapp.beans.EmployeeBean;
+import com.capgemini.springwebapp.service.EmployeeService;
+
+@Controller
+public class EmployeeController {
+	
+	private EmployeeService service;
+	@GetMapping("/login")
+	public String login()
+	{
+		return "login";
+	}
+	@PostMapping("/login")
+	public String login(String email,String password,ModelMap map,HttpServletRequest req)
+	{
+		EmployeeBean bean=service.auth(email, password);
+		if(bean==null)
+		{	
+			map.addAttribute("msg", "InValid Credentials");
+			return "login";
+		}
+		HttpSession session=req.getSession();
+		session.setAttribute("bean", bean);
+		return "home";
+	}
+}

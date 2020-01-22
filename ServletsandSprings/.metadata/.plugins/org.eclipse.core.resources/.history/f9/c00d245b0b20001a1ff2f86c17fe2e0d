@@ -1,0 +1,29 @@
+package com.capgemini.mywebapp.servlets;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.capgemini.mywebapp.bean.EmployeeInfoBean;
+import com.capgemini.mywebapp.service.EmployeeService;
+import com.capgemini.mywebapp.service.EmployeeServiceImpl;
+@WebServlet("./login")
+public class LoginServlet extends HttpServlet{
+
+	public EmployeeService service=new EmployeeServiceImpl();
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+
+		String empIdVal=req.getParameter("empid");
+		String password=req.getParameter("password");
+		int emp_id=Integer.parseInt(empIdVal);
+		EmployeeInfoBean eib=service.authenticate(emp_id, password);
+		
+
+	}//end of dopost
+}//end of classloginServ

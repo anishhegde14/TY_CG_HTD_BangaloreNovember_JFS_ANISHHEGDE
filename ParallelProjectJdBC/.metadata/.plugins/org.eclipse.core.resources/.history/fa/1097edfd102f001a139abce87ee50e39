@@ -1,0 +1,162 @@
+package com.parallelproject.hibernate.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.parallelproject.hibernate.forestrybean.ContractBean;
+import com.parallelproject.hibernate.forestryservices.ContractServices;
+import com.parallelproject.hibernate.forestryservices.ContractServicesImpl;
+import com.parallelproject.hibernate.forestryservices.ProductServices;
+import com.parallelproject.hibernate.forestryservices.ProductServicesImpl;
+
+public class HaulierController {
+	Scanner sc = new Scanner(System.in);
+	ProductServices productServices=new ProductServicesImpl();
+	ContractServices contractServices=new ContractServicesImpl();
+	public void haulierController(int id)
+	{
+		
+		System.out.println("Hi Haulier!!!!Hope You Are Having A Great Day");
+		if(contractServices.findContract(id)!=null) {
+		System.out.println("The Order That Needs To Be Delivered Soon Are:");
+		List<ContractBean> list=contractServices.getAllContractOfHaulier(id);
+		for (ContractBean contractBean : list) {
+			System.out.println("ContractNo="+contractBean.getContractno());
+			System.out.println("CustomerId"+contractBean.getCustomerid());
+			System.out.println("Order Status="+contractBean.getOrderStatus());
+			System.out.println("Product Name"+productServices.findProduct((int)contractBean.getProdid()));
+			System.out.println(contractBean.getDate());
+		}
+		System.out.println("If You Have Delivered Any Orders Then Please Change The Status");
+		System.out.println("Press 1 To Change The Status Of Any Order");
+		System.out.println("Press 2 To Find A Order");
+		System.out.println("Press 3 To See All Orders");
+		int choice=0;
+		boolean isValid1=true;
+		while(isValid1) {
+		try {
+		Scanner sc=new Scanner(System.in);
+			int choice2=sc.nextInt();
+			if(choice2>=1 && choice2<=5) {
+			choice=choice2;
+			isValid1=false;}
+		} catch (Exception e) {
+
+		}
+
+		}
+		switch (choice) {
+		case 1:List<ContractBean> beanlist=contractServices.getAllContractOfHaulier(id);
+		for (ContractBean contractBean2 : beanlist) {
+			if(!contractBean2.getOrderStatus().equals("Delivered")) {
+				System.out.print("ContractId:"+contractBean2.getContractno());
+				System.out.println("Delivery Date:"+contractBean2.getDate());
+				System.out.println("Product ID:"+contractBean2.getProdid());
+				System.out.println("Quantity:"+contractBean2.getQty());
+				System.out.println("Day:"+contractBean2.getDay());
+				System.out.println("HaulierId:"+contractBean2.getHaulid());
+				System.out.println("order Status="+contractBean2.getOrderStatus());
+				System.out.println("-----------------------------------------------------");
+			}
+		}
+		int schoice=0;
+		boolean isValid2=true;
+		while(isValid2) {
+		try {
+		Scanner sc=new Scanner(System.in);
+			int choice2=sc.nextInt();
+			if(contractServices.findContract(choice2).getHaulid() == id)
+			{
+			schoice=choice2;
+			isValid2=false;}
+		} catch (Exception e) {
+			System.out.println("Invalid Input!!!!");
+		}}
+		if(contractServices.findContract(schoice).getOrderStatus().equals("Ordered")) {
+			
+			System.out.println("Press 1 To Change It to Delivered");
+			int dchoice=0;
+			boolean isValid3=true;
+			while(isValid3) {
+			try {
+			Scanner sc=new Scanner(System.in);
+				int choice2=sc.nextInt();
+				if(choice2==1)
+				{
+				dchoice=choice2;
+				isValid3=false;}
+				else {
+					System.out.println("Enter Valid Input");
+				}
+			} catch (Exception e) {
+				System.out.println("Invalid Input!!!!");
+			}}
+			
+			
+			
+			
+			
+			
+			
+		}
+		else
+		{
+			System.out.println("The Product Is Already Delivered");
+		}
+		
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		
+		}
+		else {
+			
+			
+			System.out.println("Great Going!!!No Deliveries Left!!!!");
+			System.out.println("Press 1 to See Your Previous Orders");
+				
+			int choice1=0;
+			boolean isValid=true;
+			while(isValid) {
+			try {
+			Scanner sc=new Scanner(System.in);
+				int choice2=sc.nextInt();
+				isValid=false;
+			} catch (Exception e) {
+
+			}
+			
+			
+			}
+			List<ContractBean> bean=contractServices.getAllContractOfHaulier(id);
+					for (ContractBean contractBean2 : bean) {
+						
+					System.out.print("ContractId:"+contractBean2.getContractno());
+					System.out.println("Delivery Date:"+contractBean2.getDate());
+					System.out.println("Product ID:"+contractBean2.getProdid());
+					System.out.println("Quantity:"+contractBean2.getQty());
+					System.out.println("Day:"+contractBean2.getDay());
+					System.out.println("HaulierId:"+contractBean2.getHaulid());
+					System.out.println("order Status="+contractBean2.getOrderStatus());
+					System.out.println("-----------------------------------------------------");
+					}
+				}
+
+	
+	
+	
+	
+	}
+		
+		
+		
+		
+	}
+	
+	
+

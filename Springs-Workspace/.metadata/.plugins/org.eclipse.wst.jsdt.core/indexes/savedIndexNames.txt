@@ -1,0 +1,9 @@
+INDEX VERSION 1.4+C:\Users\Dell PC\Springs-Workspace\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3239683873.index
+1221271675.index
+1482869656.index
+45194974.index
+485642199.index
+3667669002.index
+4247032831.index
+1481324630.index

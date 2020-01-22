@@ -1,0 +1,5 @@
+package com.capgemini.springwebapp.dao;
+
+public interface EmployeeDAO {
+
+}

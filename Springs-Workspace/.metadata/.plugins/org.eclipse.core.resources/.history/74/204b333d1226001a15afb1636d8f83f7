@@ -1,0 +1,85 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page session="false" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>HOME</title>
+</head>
+<body>
+
+<form action="./register" method="post">
+<fieldset>
+    <legend>Employee details</legend>
+	<table>
+		<tr>
+			<td>Name</td>
+			<td><input type="text" name="name"></td>
+		</tr>
+		<tr>
+			<td>Email</td>
+			<td><input type="text" name="email"></td>
+		</tr>
+		<tr>
+			<td>Password</td>
+			<td><input type="password" name="password"></td>
+		</tr>
+	</table>
+</fieldset>
+<fieldset>
+        <legend>Employee address 2</legend>
+        <table>
+        <tr>
+        <td>Address type</td>
+        <td><select name="list[0]addType">
+       <option>-------select----------</option>
+       <option value="P">Permanent</option>
+       <option value="T">Temporary</option>
+        
+       </select></td>
+        </tr>
+        <tr>
+        
+        <td>Address1:</td>
+        <td><input type="text" name=list[0]address1></td>
+        
+        </tr>
+        <tr>
+        
+        <td>Address2:</td>
+        <td><input type="text" name=list[0]address2></td>
+        
+        </tr>
+        </table>
+	</fieldset>
+	<fieldset>
+        <legend>Employee  address 2</legend>
+        <table>
+        <tr>
+        <td>Address type</td>
+        <td><select name="list[0]addType">
+       <option>-------select----------</option>
+       <option value="P">Permanent</option>
+       <option value="T">Temporary</option>
+        
+       </select></td>
+        </tr>
+        <tr>
+        
+        <td>Address1:</td>
+        <td><input type="text" name=list[1]address1></td>
+        
+        </tr>
+        <tr>
+        
+        <td>Address2:</td>
+        <td><input type="text" name=list[1]address2></td>
+        
+        </tr>
+        </table>
+	</fieldset>
+    <input style="margin-block-start: 30px;"type="submit" value="register">
+</form>
+</body>
+</html>

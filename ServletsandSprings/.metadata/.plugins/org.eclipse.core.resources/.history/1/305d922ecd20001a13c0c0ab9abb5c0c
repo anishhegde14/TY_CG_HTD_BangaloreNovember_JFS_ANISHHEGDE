@@ -1,0 +1,8 @@
+package com.capgemini.mywebapp.servletsforjsps;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+@WebServlet("/login2")
+public class LoginServlet extends HttpServlet{
+
+}

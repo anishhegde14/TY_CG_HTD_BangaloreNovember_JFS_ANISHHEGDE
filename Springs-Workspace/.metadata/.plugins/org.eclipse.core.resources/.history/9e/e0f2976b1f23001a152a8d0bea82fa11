@@ -1,0 +1,51 @@
+package com.capgemini.springcore.beans;
+
+import org.springframework.beans.factory.DisposableBean;
+import org.springframework.beans.factory.InitializingBean;
+
+public class Hello implements InitializingBean,DisposableBean{
+
+	
+	public Hello() {System.out.println("Object Created");}
+	public Hello(String message, int count) {
+		this.message = message;
+		this.count = count;
+		
+	}
+
+	private String message;
+	private int count;
+
+	/*
+	 * @Override public void afterPropertiesSet() {
+	 * System.out.println("Init method"); }
+	 */
+	@Override
+	public void destroy()
+	{
+		System.out.println("Destroy method");
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	
+	public void init()
+	{
+		System.out.println("init method");
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+		
+	}
+	

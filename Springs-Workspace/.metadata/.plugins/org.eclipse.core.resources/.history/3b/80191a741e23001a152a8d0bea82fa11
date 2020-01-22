@@ -1,0 +1,52 @@
+package com.capgemini.springcore.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
+
+import com.capgemini.springcore.Pet;
+import com.capgemini.springcore.beans.Cat;
+import com.capgemini.springcore.beans.Dog;
+import com.capgemini.springcore.beans.Hello;
+
+@Configuration
+public class BeansConfig {
+
+	@Bean("hello")
+	@Scope("Prototype")
+	public Hello getHello()
+	{
+
+		Hello hello=new Hello();
+		hello.setMessage("Hello From the other side!!"
+				+ "");
+		hello.setCount(1000);
+		return hello;
+
+
+
+	}
+	@Bean(name="Pet")
+	public Pet getPet()
+	{
+		Pet pet=new Pet();
+	    pet.setName("I am Cat");
+		pet.setAnimal(getDog());
+	System.out.println(pet.getName());
+	System.out.println(pet.getAnimal());
+	return pet;
+	
+	}
+	@Bean=("Cat")
+			@Primary
+	public Cat getCat() {
+		
+		return new Cat();
+	}
+	@Bean(name="dog")
+	public Dog getDog()
+	{
+		return new Dog();
+	}
+}

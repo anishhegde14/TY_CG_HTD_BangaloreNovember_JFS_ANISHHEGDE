@@ -1,0 +1,33 @@
+package com.capgemini.springcore.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
+
+import com.capgemini.springcore.beans.Dog;
+import com.capgemini.springcore.beans.Hello;
+
+@Configuration
+public class BeansConfig {
+
+	@Bean("hello")
+	@Scope("Prototype")
+	public Hello getHello()
+	{
+
+		Hello hello=new Hello();
+		hello.setMessage("Hello From the other side!!"
+				+ "");
+		hello.setCount(1000);
+		return hello;
+
+
+
+	}
+	
+	@Bean(name="dog")
+	public Dog getDog()
+	{
+		return new Dog();
+	}
+}

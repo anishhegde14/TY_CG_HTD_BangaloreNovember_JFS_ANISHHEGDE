@@ -1,0 +1,155 @@
+package com.parallelproject.jdbc.forestrydao;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
+
+import com.parallelproject.jdbc.forestrybean.ProductBean;
+
+public class ProductDAOImpl implements ProductDAO {
+	FileReader f;
+	Properties prop;
+
+	public ProductDAOImpl() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Driver Loaded");
+			f = new FileReader("db.properties");
+			prop = new Properties();
+			prop.load(f);
+
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public List<ProductBean> getAllProducts() {
+		List<ProductBean> li = new ArrayList<ProductBean>();
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				Statement stmt = conn.createStatement();
+				ResultSet rs = stmt.executeQuery(prop.getProperty("queryp1"))) {
+			while (rs.next()) {
+				ProductBean product = new ProductBean();
+				product.setProductId(rs.getInt(1));
+				product.setProductName(rs.getString(2));
+				li.add(product);
+
+			}
+
+			return li;
+		} catch (Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public boolean addProducts(ProductBean product) {
+
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("quereypadd"))) {
+			pstmt.setInt(1, product.getProductId());
+			pstmt.setString(2, product.getProductName());
+			int a = pstmt.executeUpdate();
+			if (a != 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return false;
+	}
+
+	@Override
+	public boolean deleteProducts(int id) {
+
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryproddel"))) {
+			pstmt.setInt(1, id);
+			int a=pstmt.executeUpdate();
+			if(a!=0)
+			{
+				return true;
+			}
+				}
+		catch (Exception e) {
+
+		return false;
+		}
+		
+		
+		return false;
+	}
+
+	@Override
+	public ProductBean findProduct(int id) {
+		ProductBean product=new ProductBean();
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryp2"))) {
+			pstmt.setInt(1, id);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				product.setProductId(rs.getInt(1));
+				product.setProductName(rs.getNString(2));
+			}
+		return product;
+		}
+		catch (Exception e) {
+
+		return null;
+		}
+	}
+	@Override
+	public ProductBean findProduct1(String id) {
+		ProductBean product=new ProductBean();
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryp3"))) {
+			pstmt.setString(1, id);
+			ResultSet rs=pstmt.executeQuery();
+			while(rs.next())
+			{
+				product.setProductId(rs.getInt(1));
+				product.setProductName(rs.getNString(2));
+			}
+		return product;
+		}
+		catch (Exception e) {
+
+		return null;
+		}
+	}
+
+	@Override
+	public boolean updateProduct(ProductBean product, int id) {
+
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryp3"))) {
+			pstmt.setInt(1, product.getProductId());
+			pstmt.setString(2, product.getProductName());
+			int a = pstmt.executeUpdate();
+			if (a != 0) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+		return false;
+
+	
+	
+	}
+
+}
+}

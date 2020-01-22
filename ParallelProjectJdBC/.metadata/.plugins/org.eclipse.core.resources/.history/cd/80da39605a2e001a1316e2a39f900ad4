@@ -1,0 +1,53 @@
+package com.parallelproject.hibernate.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import com.parallelproject.hibernate.forestrybean.ContractBean;
+import com.parallelproject.hibernate.forestryservices.ContractServices;
+import com.parallelproject.hibernate.forestryservices.ContractServicesImpl;
+import com.parallelproject.hibernate.forestryservices.ProductServices;
+import com.parallelproject.hibernate.forestryservices.ProductServicesImpl;
+
+public class HaulierController {
+	Scanner sc = new Scanner(System.in);
+	ProductServices productServices=new ProductServicesImpl();
+	ContractServices contractServices=new ContractServicesImpl();
+	public void haulierController(int id)
+	{
+		
+		System.out.println("Hi Haulier!!!!Hope You Are Having A Great Day");
+		if(contractServices.findContract(id)!=null) {
+		System.out.println("The Order That Needs To Be Delivered Soon Are:");
+		List<ContractBean> list=contractServices.getAllContractOfHaulier(id);
+		for (ContractBean contractBean : list) {
+			System.out.println("ContractNo="+contractBean.getContractno());
+			System.out.println("CustomerId"+contractBean.getCustomerid());
+			System.out.println("Order Status="+contractBean.getOrderStatus());
+			System.out.println("Product Name"+productServices.findProduct((int)contractBean.getProdid()));
+			System.out.println(contractBean.getDate());
+		}
+		
+		}
+		else {
+			
+			
+			System.out.println("Great Going!!!No Deliveries Left!!!!");
+			System.out.println("Press 1 to See Your Previous Orders");
+			boolean isId=true;
+			while(isId)
+			{	int oid1=sc.nextInt();
+				if(contractServices.findContract(id).getHaulid()==id) {
+					ContractBean bean=contractServices.findContract(oid1);
+					
+				}
+			}
+		}
+		
+		
+		
+		
+	}
+	
+	
+}

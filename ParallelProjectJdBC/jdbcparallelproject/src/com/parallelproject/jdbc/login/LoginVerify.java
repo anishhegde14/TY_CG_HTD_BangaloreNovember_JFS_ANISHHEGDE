@@ -1,0 +1,136 @@
+package com.parallelproject.jdbc.login;
+
+import java.io.FileReader;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Properties;
+
+import com.parallelproject.jdbc.forestrybean.CustomerBean;
+
+public class LoginVerify {
+	FileReader f;
+	Properties prop;
+
+	public LoginVerify() {
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			System.out.println("Driver Loaded");
+			f = new FileReader("db.properties");
+			prop = new Properties();
+			prop.load(f);
+
+		} catch (ClassNotFoundException | IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public int type(String name, int id) {
+
+		int key = 0;
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryl"))) {
+
+			pstmt.setInt(1, id);
+			pstmt.setString(2, name);
+			ResultSet rs = pstmt.executeQuery();
+			while (rs.next()) {
+				key = rs.getInt("type");
+			}
+			return key;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return 0;
+
+		}
+
+	}
+
+	public int validId(int id)
+		{
+			
+			try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+					PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryl1"))) {
+
+				pstmt.setInt(1, id);
+				ResultSet rs = pstmt.executeQuery();
+				int id1=0;
+				while(rs.next()) {
+				 id1=rs.getInt(1);
+				}
+				return id1;
+				}
+			catch (Exception e) {
+				e.printStackTrace();
+				return 0;
+			
+			}
+		
+		
+	}
+	public String validName(String name)
+	{
+		
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryl2"))) {
+
+			pstmt.setString(1, name);
+			ResultSet rs = pstmt.executeQuery();
+			String name1=null;
+			while(rs.next()) {
+			name1=rs.getNString(1);
+			
+			
+			}
+			return name1;
+			}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		
+		}
+	
+	
+}
+	public boolean addLoginCredentials(int id,String name,int key) {
+		try(Connection conn=DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt=conn.prepareStatement(prop.getProperty("queryladd"))){
+			
+			pstmt.setInt(1, id);
+			pstmt.setString(2, name);
+			pstmt.setInt(3,key);
+			
+			
+			int isAdded=pstmt.executeUpdate();
+			if(isAdded!=0)
+			{
+				return true;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			System.out.println("Customer not added");
+		}
+		return false;
+	}
+	public boolean deleteContract(int id) {
+		try (Connection conn = DriverManager.getConnection(prop.getProperty("dburl"), prop);
+				PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("queryldel"))) {
+			pstmt.setInt(1, id);
+			int a = pstmt.executeUpdate();
+			if (a != 0) {
+				return true;
+			}
+			return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+
+	}
+	
+		}
+

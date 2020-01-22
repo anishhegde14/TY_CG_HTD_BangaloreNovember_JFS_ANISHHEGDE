@@ -1,0 +1,48 @@
+package com.capgemini.springwebapp.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.capgemini.springwebapp.beans.EmployeeBean;
+
+public class EmployeeDAOimpl implements EmployeeDAO{
+
+	@Override
+	public EmployeeBean auth(String email, String password) {
+
+		EntityManagerFactory emf=Persistence.createEntityManagerFactory("employee_info");
+		EntityManager em=emf.createEntityManager();
+		
+		
+		
+		return null;
+	}
+
+	@Override
+	public boolean addEmployee(EmployeeBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public EmployeeBean getEmployee(String email) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<EmployeeBean> getEmployees(String name) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean changePassword(int id, String password) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+}

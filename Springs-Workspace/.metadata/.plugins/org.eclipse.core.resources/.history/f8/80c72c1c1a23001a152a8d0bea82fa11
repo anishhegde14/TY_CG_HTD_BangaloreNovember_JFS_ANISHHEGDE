@@ -1,0 +1,24 @@
+package com.capgemini.springcore.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.capgemini.springcore.beans.Hello;
+
+@Configuration
+public class BeansConfig {
+
+	@Bean("hello")
+	public Hello getHello()
+	{
+
+		Hello hello=new Hello();
+		hello.setMessage("Hello From the other side!!"
+				+ "");
+		hello.setCount(1000);
+		return hello;
+
+
+
+	}
+}

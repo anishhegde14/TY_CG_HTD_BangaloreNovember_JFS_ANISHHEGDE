@@ -1,0 +1,30 @@
+package com.capgemini.springcore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import com.capgemini.springcore.beans.Animal;
+import com.capgemini.springcore.beans.Hello;
+import com.capgemini.springcore.config.BeansConfig;
+
+public class AnnotationConfigApp {
+
+	public static void main(String[] args) {
+		
+		
+		ApplicationContext cont=new AnnotationConfigApplicationContext(BeansConfig.class);
+		Hello hello=cont.getBean(Hello.class);
+		System.out.println(hello.getMessage());
+		System.out.println(hello.getCount());System.out.println("Hello 1="+hello);
+		
+		Hello hello1=cont.getBean(Hello.class);
+		System.out.println(hello1.getMessage());
+		System.out.println(hello1.getCount());
+		System.out.println(hello1);
+		System.out.println(hello1);
+		System.out.println(hello1==hello);
+		System.out.println("==================================================================");
+		Animal animal=cont.getBean(Animal.class);
+		animal.makeSound();
+	}
+}

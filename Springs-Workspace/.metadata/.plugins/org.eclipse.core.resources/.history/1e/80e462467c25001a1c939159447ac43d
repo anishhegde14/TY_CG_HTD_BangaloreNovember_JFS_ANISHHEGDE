@@ -1,0 +1,11 @@
+package com.capgemini.springwebapp.beans;
+
+public class EmployeeAddressBean {
+
+	
+	
+	private int id;
+	private String address_type;
+	private String address1;
+	private String address2;
+}

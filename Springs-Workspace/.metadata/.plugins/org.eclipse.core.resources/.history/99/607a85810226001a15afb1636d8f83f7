@@ -1,0 +1,5 @@
+package com.capgemini.springwebapp.service;
+
+public interface EmployeeService {
+
+}

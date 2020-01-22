@@ -1,0 +1,30 @@
+package com.capgemini.springrest.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+
+import com.capgemini.springrest.dto.EmployeeBean;
+import com.capgemini.springrest.service.EmployeeService;
+@Controller
+public class EmployeeController {
+	@Autowired
+	private EmployeeService service;
+	
+	public EmployeeBean auth(String email,String password) {
+		return service.auth(email, password);
+	}
+	public boolean register(EmployeeBean bean)
+	{
+		return service.addEmployee(bean);
+	}
+	public List<EmployeeBean> searchEmployee(String key)
+	{
+		return service.getEmployees(key);
+	}
+	public boolean changePassword(int id,String password)
+	{
+		return service.changePassword(id, password);
+	}
+}

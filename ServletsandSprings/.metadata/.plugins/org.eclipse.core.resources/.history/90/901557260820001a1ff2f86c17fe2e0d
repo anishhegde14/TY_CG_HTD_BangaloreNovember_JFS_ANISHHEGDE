@@ -1,0 +1,20 @@
+package com.capgemini.mywebapp.service;
+
+import com.capgemini.mywebapp.bean.EmployeeInfoBean;
+import com.capgemini.mywebapp.dao.EmployeeDAOImpl;
+import com.capgemini.mywebapp.dao.EmployeeDao;
+
+public class EmployeeServiceImpl implements EmployeeService{
+	
+	
+	private EmployeeDao dao=new EmployeeDAOImpl();
+
+	@Override
+	public EmployeeInfoBean searchEmployee(int empid) {
+
+	return dao.searchEmployee(empid);
+	}
+	
+	public EmployeeInfoBean authenticate(int empid,String password);
+
+}

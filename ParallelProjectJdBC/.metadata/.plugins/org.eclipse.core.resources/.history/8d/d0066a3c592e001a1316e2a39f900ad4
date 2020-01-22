@@ -1,0 +1,26 @@
+package com.parallelproject.hibernate.controller;
+
+import com.parallelproject.hibernate.forestryservices.ContractServices;
+import com.parallelproject.hibernate.forestryservices.ContractServicesImpl;
+
+public class HaulierController {
+
+	
+	ContractServices contractServices=new ContractServicesImpl();
+	public void haulierController(int id)
+	{
+		
+		System.out.println("Hi Haulier!!!!Hope You Are Having A Great Day");
+		if(contractServices.findContract(id)!=null) {
+		System.out.println("The Order That Needs To Be Delivered Soon Are:");
+		List<ContractBean> list=contractServices.getAllContractOfCustomer(customerId)
+			
+		}
+		
+		
+		
+		
+	}
+	
+	
+}

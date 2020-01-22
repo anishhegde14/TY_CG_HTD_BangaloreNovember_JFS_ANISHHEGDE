@@ -1,0 +1,122 @@
+package com.capgemini.springmvc.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.ws.Response;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.capgemini.springmvc.beans.User;
+
+@Controller
+public class SpringController {
+	User u=new User();
+	@RequestMapping("/hello")
+	public String hello(ModelMap map) {
+
+
+		map.addAttribute("msg", "Hello World!!!!!!!!!!");
+		return "index";
+	}
+	//@RequestMapping(path="/query",method = RequestMethod.GET)
+	@GetMapping("/query")
+	public String query(@RequestParam(name="name",required=false)String name,@RequestParam(name="age",required=false)Integer age,
+			ModelMap map)
+	{
+
+
+		map.addAttribute("name",name);
+		map.addAttribute("age", age);
+
+		return "query";
+	}
+
+	@GetMapping("/form")
+	public String form() {
+
+		return "form";
+	}
+	@PostMapping("/form")
+	public String form(User user,ModelMap map)
+	{
+		map.addAttribute("name",u.getName());
+		map.addAttribute("email",u.getEmail());
+		map.addAttribute("password",u.getPassword());
+		map.addAttribute("gender", u.getGender());
+
+		return "form";
+	}
+	@GetMapping("/createcookie")
+	public String createCookie(HttpServletResponse resp) {
+		Cookie cookie=new Cookie("name", "Anish");
+		resp.addCookie(cookie);
+		return "createcookie";
+	}
+	@GetMapping("/getcookie")
+	public String getCookie(@CookieValue(name="name", required=false)String name,ModelMap map)/*In Servlet and Jsp (HttpServletRequest req) */
+	{
+		if(name!=null) {
+			map.addAttribute("name",name);}
+		else {
+			map.addAttribute("name","Anish1");
+		}
+
+
+
+		/* In Servlets and Jsp
+		 * Cookie[] cookie=req.getCookies(); for (Cookie cookie2 : cookie) {
+		 * if(cookie2.getName().equals("name")) { String value=cookie2.getValue(); } }
+		 */
+
+		return "getcookie";
+
+	}
+	@GetMapping("/path/{movie}/{hero}")
+	public String path(@PathVariable("movie")String movie,@PathVariable("hero")String hero,ModelMap map)
+	{
+		/*IF WE HAVE TO GIVE SPACE BETWEEN TWO WORDS THEN TYPE %20 BETWEEN THEM IN THE URL*/
+		map.addAttribute("movie",movie);
+		map.addAttribute("hero",hero);
+		return "pathvalue";
+	}
+
+	
+	/*With servlet
+	 * public String forwardreq(HttpServletRequest req,HttpServletResponse response)
+	 * throws ServletException, IOException {
+	 * 
+	 * req.getRequestDispatcher("/hello").forward(req, response); return
+	 * "forwardreq"; }
+	 */
+	@GetMapping("/forward")
+	public String forward()
+	{
+		return "forward:hello";
+	}
+
+	/*
+	 * public String redirect(HttpServletRequest req,HttpServletResponse resp)
+	 * throws IOException
+	 * 
+	 * { resp.sendRedirect("https:\\www.google.com");
+	 * 
+	 * return ""; }
+	 */
+	@GetMapping("/redirect")
+	public String redirect()
+	{
+		return "redirect:https://www.google.com";
+	}
+}

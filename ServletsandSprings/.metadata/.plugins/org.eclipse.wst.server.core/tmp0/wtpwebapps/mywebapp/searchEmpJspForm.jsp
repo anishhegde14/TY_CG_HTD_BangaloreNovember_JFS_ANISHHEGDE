@@ -1,0 +1,56 @@
+<%@page import="com.capgemini.mywebapp.bean.EmployeeInfoBean"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
+    <%@page session="false" %>
+    
+    <%EmployeeInfoBean eib=(EmployeeInfoBean)request.getAttribute("eib"); %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Search Employee</title>
+</head>
+<body>
+<fieldset>
+<legend>Search Employee</legend>
+<form action="./getEmployeeJsp" method="get">
+Employee ID:<input type="number" name="empid" required><br>
+<input type="submit" value="search">
+
+</form>
+
+
+</fieldset>
+
+<%if(eib!=null){ %>
+<br>
+<table>
+  <tr>
+    <td>Empid:</td>
+	<td><%=eib.getEmp_id() %></td>
+  </tr>
+  <tr>
+    <td>EmpName:</td>
+	<td><%=eib.getName() %></td>
+  </tr>
+  <tr>
+    <td>Designation:</td>
+	<td><%=eib.getDesignation() %></td>
+  </tr>
+  <tr>
+    <td>Emp Salary:</td>
+	<td><%=eib.getSalary() %></td>
+  </tr>
+  <tr>
+    <td>Age:</td>
+	<td><%=eib.getAge() %></td>
+  </tr>
+</table>
+
+<%}else{ %>
+<h3 style="color:red">Employee Not Found!!!!</h3>
+<%} %>
+
+
+</body>
+</html>

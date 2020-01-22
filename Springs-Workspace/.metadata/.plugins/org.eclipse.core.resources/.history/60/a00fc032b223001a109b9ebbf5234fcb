@@ -1,0 +1,10 @@
+package com.capgemini.springcore;
+
+public class AnnotationComponentScanTest {
+
+	public static void main(String[] args) {
+		
+	}
+	
+	
+}

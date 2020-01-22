@@ -1,0 +1,5 @@
+package com.capgemini.mywebapp.servletsforjsps;
+
+public class LoginServlet {
+
+}

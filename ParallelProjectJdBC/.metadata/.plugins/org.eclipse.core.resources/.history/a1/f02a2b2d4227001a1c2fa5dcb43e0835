@@ -1,0 +1,26 @@
+package com.parallelproject.jdbc.admin;
+
+import java.util.List;
+
+import com.parallelproject.jdbc.forestrybean.ContractBean;
+import com.parallelproject.jdbc.forestrybean.CustomerBean;
+import com.parallelproject.jdbc.forestrydao.ContractDAOImpl;
+import com.parallelproject.jdbc.forestrydao.ContractorDAO;
+import com.parallelproject.jdbc.forestrydao.ForestryCustomerDAOImpl;
+import com.parallelproject.jdbc.forestrydao.ForestryCustomerDao;
+
+public class Admin{
+	
+	public static void main(String[] args) {
+		
+		
+		/*
+		 * ContractorDAO dao=new ContractDAOImpl(); List<ContractBean>
+		 * listbean=dao.getAllContract(); System.out.println(listbean);
+		 * System.out.println(dao.findContract(1));
+		 */
+
+		ForestryCustomerDao dao=new ForestryCustomerDAOImpl();
+		dao.getAllCustomer()
+	}
+}

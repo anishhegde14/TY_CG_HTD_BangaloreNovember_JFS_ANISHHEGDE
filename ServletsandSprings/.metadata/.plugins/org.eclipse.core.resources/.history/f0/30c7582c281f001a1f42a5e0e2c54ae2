@@ -1,0 +1,4 @@
+package com.capgemini.mywebapp.service
+public interface EmployeeService {
+
+}

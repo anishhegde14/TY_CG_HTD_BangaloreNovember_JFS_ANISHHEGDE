@@ -1,0 +1,45 @@
+package com.parallelproject.hibernate.controller;
+
+import java.util.Scanner;
+
+import com.parallelproject.hibernate.forestryservices.ContractServices;
+import com.parallelproject.hibernate.forestryservices.ContractServicesImpl;
+import com.parallelproject.hibernate.forestryservices.ProductServices;
+import com.parallelproject.hibernate.forestryservices.ProductServicesImpl;
+import com.parallelproject.hibernate.login.LoginVerify;
+
+public class Admin {
+	
+	static Scanner sc=new Scanner(System.in);
+	static ProductServices productservices = new ProductServicesImpl();
+	static ContractServices contractServices = new ContractServicesImpl();
+	public static void main(String[] args) {
+		while(true) {
+		System.out.println("WELCOME TO FORESTRY MANAGEMENT WEBSITE (CREATED USING HIBERNATE)");
+		System.out.println("PLEASE LOGIN TO CONTINUE");
+		System.out.println("ENTER YOUR CREDENTIALS");
+		System.out.println("Enter Your ID");
+		int id = sc.nextInt();
+		System.out.println("Enter Your Name");
+		String name = sc.next();
+		LoginVerify verify = new LoginVerify();
+		int key = verify.type(name, id);
+		System.out.println(key);
+		
+		switch (key) {
+
+		case 1:CustomerController control=new CustomerController();
+			control.customerControl(id);
+			break;
+			
+		case 2: AdminController adminControl=new AdminController();
+				adminControl.admincontrol(id);
+				break;
+		case 3:HaulierController haulierControl=new HaulierController();
+				haulierControl.haulierController(id);
+		default:
+			break;
+		}
+		}
+	}
+}

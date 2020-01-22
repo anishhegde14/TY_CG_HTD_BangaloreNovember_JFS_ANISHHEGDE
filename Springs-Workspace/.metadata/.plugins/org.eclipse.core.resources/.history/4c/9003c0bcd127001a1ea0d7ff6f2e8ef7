@@ -1,0 +1,99 @@
+package com.capgemini.springrest.dao;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceUnit;
+import javax.persistence.TypedQuery;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.stereotype.Repository;
+
+import com.capgemini.springrest.dto.EmployeeBean;
+import com.capgemini.springrest.exception.EmployeeException;
+@Repository
+public class EmployeeDAOimpl implements EmployeeDAO{
+	@PersistenceUnit
+	private EntityManagerFactory emf;
+	@Override
+	public EmployeeBean auth(String email, String password) {
+		EntityManager em=emf.createEntityManager();
+		String jpql="from EmployeeBean where email=:email";
+		TypedQuery<EmployeeBean> query=em.createQuery(jpql,EmployeeBean.class);
+		query.setParameter("email", email);
+		//query.setParameter("password", password);
+		try {
+		EmployeeBean emp=query.getSingleResult();
+		BCryptPasswordEncoder encoder=new BCryptPasswordEncoder();
+		if(encoder.matches(password, emp.getPassword())){
+			return emp;
+		}
+		else
+		{
+			throw new EmployeeException("PASSWORD INVALID");
+		}
+		}
+		catch(Exception e) {
+			return null;
+		}
+	}
+
+	@Override
+	public boolean addEmployee(EmployeeBean bean) {
+		EntityManager em=emf.createEntityManager();
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		try {
+		em.persist(bean);
+		et.commit();
+		return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			throw new EmployeeException("EMAIL ALREADY EXISTS!!!");
+		}
+	}
+
+	
+	@Override
+	public List<EmployeeBean> getEmployees(String key) {
+		try {
+		String jpql="from EmployeeBean where name=:name or email=:email";
+		EntityManager em=emf.createEntityManager();
+		TypedQuery<EmployeeBean> query=em.createQuery(jpql,EmployeeBean.class);
+		query.setParameter("name", key);
+		query.setParameter("email", key);
+		List<EmployeeBean> list=query.getResultList();
+		return list;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@Override
+	public boolean changePassword(int id, String password) {
+		try {
+		EntityManager em=emf.createEntityManager();
+		EntityTransaction et=em.getTransaction();
+		et.begin();
+		EmployeeBean emp=em.find(EmployeeBean.class, id);
+		emp.setPassword(password);
+		et.commit();
+		return true;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+	}
+
+}

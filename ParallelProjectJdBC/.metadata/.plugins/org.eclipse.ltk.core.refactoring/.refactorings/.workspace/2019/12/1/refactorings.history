@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;ParallelProject(ForestryManagement)&apos; to &apos;parallelprojectcollections&apos;" description="Rename resource &apos;ParallelProject(ForestryManagement)&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="/ParallelProject(ForestryManagement)" name="parallelprojectcollections" stamp="1577799307174" updateReferences="true"/>
+</session>

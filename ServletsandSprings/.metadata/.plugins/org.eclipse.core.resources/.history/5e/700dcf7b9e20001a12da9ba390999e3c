@@ -1,0 +1,49 @@
+package com.capgemini.mywebapp.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import com.capgemini.mywebapp.bean.EmployeeInfoBean;
+
+public class EmployeeDAOImpl implements EmployeeDao{
+
+	private EntityManagerFactory emf=Persistence.createEntityManagerFactory("Test");
+
+	@Override
+	public EmployeeInfoBean searchEmployee(int empid) {
+
+		EntityManager em=emf.createEntityManager();
+		EmployeeInfoBean eib= em.find(EmployeeInfoBean.class, empid);
+		em.close();
+		return eib;
+		
+	}
+
+	@Override
+	public EmployeeInfoBean authenticate(int empid, String password) {
+
+	EntityManager em=emf.createEntityManager();
+	
+	String jpql="from EmployeeInfoBean where emp_id=:empid and password=:password";
+	Query query=em.createQuery(jpql);
+	query.setParameter("empid", empid);
+	query.setParameter("password", password);
+	
+	
+	EmployeeInfoBean eib=null;
+	try {
+		eib = (EmployeeInfoBean) query.getSingleResult();
+	} catch (Exception e) {
+System.err.println("NO EMPLOYEE PRESENT WITH THIS EMP ID OR WRONG PASSWORD INSERTED");
+	
+	}
+	em.close();
+	return eib;
+	
+	
+	}
+	
+	
+}

@@ -1,0 +1,13 @@
+package com.capgemini.mywebapp.service;
+
+import com.capgemini.mywebapp.dao.EmployeeDAOImpl;
+import com.capgemini.mywebapp.dao.EmployeeDao;
+
+public interface EmployeeService {
+	
+	private EmployeeDao dao=new EmployeeDAOImpl();
+
+
+
+
+}

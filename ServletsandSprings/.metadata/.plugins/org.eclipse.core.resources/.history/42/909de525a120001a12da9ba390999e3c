@@ -1,0 +1,14 @@
+package com.capgemini.mywebapp.servlets;
+
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+
+@WebServlet("/deleteEmployee")
+public class DeleteServlet extends HttpServlet{
+	
+	
+	
+	
+	
+
+}

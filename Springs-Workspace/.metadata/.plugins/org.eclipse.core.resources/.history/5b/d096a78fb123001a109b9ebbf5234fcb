@@ -1,0 +1,23 @@
+package com.capgemini.springcore;
+
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import com.capgemini.springcore.beans.Animal;
+
+public class XmlComponentScanTest {
+
+	
+	public static void main(String[] args) {
+		
+		
+		ApplicationContext con=new ClassPathXmlApplicationContext("Spring.xml");
+		Animal animal=con.getBean(Animal.class);
+		animal.makeSound();
+		
+		com.capgemini.springcore.beans.Pet pet=con.getBean(Pet.class);
+		pet.getAnimal().makeSound();
+	
+	
+	}
+}

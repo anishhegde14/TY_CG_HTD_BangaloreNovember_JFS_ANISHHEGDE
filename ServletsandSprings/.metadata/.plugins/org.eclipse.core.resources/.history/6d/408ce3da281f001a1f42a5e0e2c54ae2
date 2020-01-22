@@ -1,0 +1,21 @@
+package com.capgemini.mywebapp.dao;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import com.capgemini.mywebapp.bean.EmployeeInfoBean;
+
+public class EmployeeDAOImpl implements EmployeeDao{
+
+	private EntityManagerFactory emf=Persistence.createEntityManagerFactory("Test");
+
+	@Override
+	public EmployeeInfoBean searchEmployee(int empid) {
+
+		
+		
+		return null;
+	}
+	
+	
+}
