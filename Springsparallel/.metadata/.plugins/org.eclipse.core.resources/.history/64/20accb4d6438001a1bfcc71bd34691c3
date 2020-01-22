@@ -1,0 +1,5 @@
+package com.parallel.forestrymanagement.dto;
+
+public class SchedulerResponse {
+
+}

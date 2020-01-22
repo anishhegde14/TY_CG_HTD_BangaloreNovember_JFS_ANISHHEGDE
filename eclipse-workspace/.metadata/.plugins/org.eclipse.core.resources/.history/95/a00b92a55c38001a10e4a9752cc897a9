@@ -1,0 +1,21 @@
+package com.capgemini.selenium.assertandsoftassert;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class Assertion {
+
+	
+	
+	public void test1() throws InterruptedException
+	{
+		WebDriver driver=new ChromeDriver();
+		driver.get("");
+		String actual=driver.getTitle();
+		String expected="actiTIME";
+		Assert.assertEquals(actual, expected);
+		Thread.sleep(10000);
+		driver.close();
+	}
+}

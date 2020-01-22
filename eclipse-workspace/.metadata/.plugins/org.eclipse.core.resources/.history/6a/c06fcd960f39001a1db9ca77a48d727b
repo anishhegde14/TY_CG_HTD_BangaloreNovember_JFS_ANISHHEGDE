@@ -1,0 +1,15 @@
+package runner;
+
+import cucumber.api.CucumberOptions;
+import cucumber.api.testng.AbstractTestNGCucumberTests;
+
+@CucumberOptions(features = "./src/test/java/Feature", glue = {"stepdefinition"}, 
+plugin = {"pretty","html:target/cucumber"},monochrome = true)
+public class Runner extends AbstractTestNGCucumberTests{
+static {
+
+		
+		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+		
+	}
+}

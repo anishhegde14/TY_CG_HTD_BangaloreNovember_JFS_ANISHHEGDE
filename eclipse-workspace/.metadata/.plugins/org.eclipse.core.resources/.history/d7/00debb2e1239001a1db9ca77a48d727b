@@ -1,0 +1,15 @@
+package stepdefinition;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class StepBlue {
+
+	
+	WebDriver driver;
+	
+	public void open()
+	{
+		driver=new ChromeDriver();
+	}
+}

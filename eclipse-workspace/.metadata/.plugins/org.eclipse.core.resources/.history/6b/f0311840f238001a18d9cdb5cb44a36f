@@ -1,0 +1,8 @@
+package runner;
+
+import cucumber.api.CucumberOptions;
+
+@CucumberOptions(features = "./src/test/java/Feature")
+public class Runner extends AbstractTestNGCucumberRunner{
+
+}

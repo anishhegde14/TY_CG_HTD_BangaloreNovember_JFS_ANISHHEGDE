@@ -1,0 +1,56 @@
+package stepdefinition;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+
+public class StepBlue {
+
+	
+	WebDriver driver;
+	@Before
+	public void open()
+	{
+		driver=new ChromeDriver();
+	}
+	
+	@Given("^user enters url$")
+	public void user_enters_url() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@When("^user search for kadas$")
+	public void user_search_for_kadas() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@When("^user selects one item$")
+	public void user_selects_one_item() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@When("^user clicks on Buy Now button$")
+	public void user_clicks_on_Buy_Now_button() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	@Then("^error message must be displayed$")
+	public void error_message_must_be_displayed() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	
+	
+	@After
+	public void close()
+	{
+		driver.close();
+	}
+}

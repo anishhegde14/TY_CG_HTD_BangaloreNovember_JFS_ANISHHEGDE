@@ -1,0 +1,19 @@
+package com.capgemini.selenium.actitime;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.BeforeTest;
+
+public class BaseTest {
+static {
+
+		
+		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+		
+	}
+@BeforeTest
+public  void beforeTest() {
+	
+	 WebDriver driver=new ChromeDriver();
+}
+}

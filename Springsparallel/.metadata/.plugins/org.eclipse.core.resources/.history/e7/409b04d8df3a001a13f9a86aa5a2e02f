@@ -1,0 +1,41 @@
+package com.parallel.forestrymanagement.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+import com.parallel.forestrymanagement.dto.LoginResponse;
+import com.parallel.forestrymanagement.services.LoginServices;
+@CrossOrigin(origins = "*",allowedHeaders = "*" , allowCredentials = "true")
+@Controller
+public class LoginController {
+
+	
+	@Autowired
+	LoginServices loginServices;
+	
+	public LoginResponse auth(@RequestBody LoginDetailsBean bean)
+	{
+		LoginResponse loginResponse=new LoginResponse();
+
+			
+			if(loginServices.auth(bean).getType()==1) {
+			loginResponse.setStatusCode(200);
+			loginResponse.setMessage("client");
+			loginResponse.setDiscription("Client Login Successfull");
+		}
+			else if (loginServices.auth(bean).getType()==2) {
+				loginResponse.setStatusCode(200);
+				loginResponse.setMessage("admin");
+				loginResponse.setDiscription("Admin Login Successfull");
+			}
+			else {
+			loginResponse.setStatusCode(401);
+			loginResponse.setMessage("Failure");
+			loginResponse.setDiscription("Error");
+		}
+		return loginResponse;
+	}
+}

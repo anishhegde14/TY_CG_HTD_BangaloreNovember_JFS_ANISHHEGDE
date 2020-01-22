@@ -1,0 +1,10 @@
+package com.parallel.forestrymanagement.exception;
+
+public class ProductExceptionextends RuntimeException{
+
+
+	public ContractException(String message) {
+		super();
+	}
+	
+}

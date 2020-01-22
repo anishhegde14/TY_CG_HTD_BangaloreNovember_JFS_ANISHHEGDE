@@ -1,0 +1,50 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.parallel.forestrymanagement.dao.HaulierDAO;
+import com.parallel.forestrymanagement.dto.ClientBean;
+import com.parallel.forestrymanagement.dto.HaulierBean;
+
+public class HaulierServicesImpl implements HaulierServices{
+	@Autowired
+	private HaulierDAO dao;
+	private LoginServices services=new LoginServicesImpl() {
+		
+	};
+	@Override
+	public boolean addHaulier(HaulierBean bean) {
+		if(login)
+		
+		return false;
+	}
+
+	@Override
+	public boolean deleteHaulier(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateHaulier(HaulierBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public HaulierBean findHaulier(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<HaulierBean> seeAllHauliers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
+	
+}

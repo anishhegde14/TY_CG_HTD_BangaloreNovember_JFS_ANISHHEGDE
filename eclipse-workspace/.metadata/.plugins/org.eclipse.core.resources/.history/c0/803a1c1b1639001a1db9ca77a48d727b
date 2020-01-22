@@ -1,0 +1,8 @@
+Feature:Search Action
+
+Scenario: When user opens browser
+		  And user enters url
+		  When user search for kadas
+		  And user selects one item
+		  And user clicks on Buy Now button
+		  Then error message must be displayed

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item key="selection" value="Haulier"/>
+		<item key="wrap" value="false"/>
+		<item key="casesensitive" value="true"/>
+		<item key="wholeword" value="false"/>
+		<item key="incremental" value="false"/>
+		<item key="isRegEx" value="false"/>
+		<list key="findhistory">
+			<item value="Product"/>
+			<item value="Client"/>
+			<item value="customer"/>
+			<item value="Customer"/>
+			<item value="ClientId"/>
+			<item value="hashC"/>
+			<item value="name"/>
+			<item value="one"/>
+			<item value="many"/>
+			<item value="haulier"/>
+			<item value="haulier_id"/>
+			<item value="login"/>
+			<item value="long"/>
+			<item value="int"/>
+			<item value="intlong"/>
+		</list>
+		<list key="replacehistory">
+			<item value="Haulier"/>
+			<item value="Contract"/>
+			<item value="client"/>
+			<item value="Client"/>
+			<item value="email"/>
+			<item value="One"/>
+			<item value="one"/>
+			<item value="int"/>
+			<item value="long"/>
+			<item value="haulierId"/>
+			<item value="productId"/>
+			<item value="customerResponse"/>
+			<item value="Customer"/>
+			<item value="CustomerBean"/>
+		</list>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item key="DIALOG_X_ORIGIN" value="955"/>
+		<item key="DIALOG_Y_ORIGIN" value="148"/>
+		<item key="DIALOG_WIDTH" value="284"/>
+		<item key="DIALOG_HEIGHT" value="391"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+</section>

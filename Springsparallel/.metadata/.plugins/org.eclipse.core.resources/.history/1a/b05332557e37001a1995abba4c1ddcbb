@@ -1,0 +1,51 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.parallel.forestrymanagement.dao.ContractorDAO;
+import com.parallel.forestrymanagement.dto.ContractBean;
+import com.parallel.forestrymanagement.exception.ContractException;
+@Repository
+public class ContractServicesImpl implements ContractServices{
+	@Autowired
+	ContractorDAO dao;
+	@Override
+	public boolean addContract(ContractBean bean) {
+		if(dao.findContract(bean.getContractno()).getContractno()!=0) {
+			dao.addContract(bean);
+			return true;
+		}else
+		{
+			throw new ContractException("Contract Already Exists");
+					}
+		
+	}
+
+	@Override
+	public boolean deleteContract(String id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateContract(ContractBean bean) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public ContractBean findContract(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<ContractBean> getAllContract() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

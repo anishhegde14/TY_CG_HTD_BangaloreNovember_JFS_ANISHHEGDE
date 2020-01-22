@@ -1,0 +1,5 @@
+package com.parallel.forestrymanagement.dao;
+
+public interface LoginDao {
+
+}

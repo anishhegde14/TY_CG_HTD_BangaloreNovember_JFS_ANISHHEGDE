@@ -1,0 +1,83 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
+import com.parallel.forestrymanagement.dao.ProductDAO;
+import com.parallel.forestrymanagement.dto.ProductBean;
+import com.parallel.forestrymanagement.exception.ProductException;
+
+@Service
+public class ProductServicesImpl implements ProductServices{
+	@Autowired
+	public ProductDAO dao;
+	@Override
+	public boolean addProducts(ProductBean bean) {
+		try {
+			if(((dao.findProduct1(bean.getProductName()).getProductName()).equalsIgnoreCase(bean.getProductName())==false) )
+			{
+				System.out.println("in add service impl");
+				dao.addProducts(bean);
+				return true;
+			}
+			else if (dao.findProduct1(bean.getProductName())==null) {
+				System.out.println("in add service impl");
+				dao.addProducts(bean);
+				return true;
+			}
+		} catch (Exception e) {
+			System.out.println("in catch");
+			return false;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean updateProduct(String name, String qty) {
+		if(dao.findProduct1(name).getProductId()!=0)
+		{
+			ProductBean bean=new ProductBean();
+			try {
+				bean.setAvaliableqty(Integer.parseInt(qty));
+				dao.updateProduct(bean, bean.getProductId());
+				return true;
+			} catch (NumberFormatException e) {
+				return false;
+			}
+		}
+		
+		return false;
+	}
+
+	@Override
+	public List<ProductBean> seeAllProducts() {
+	return dao.getAllProducts();
+		
+	}
+
+	@Override
+	public ProductBean findProduct(String id) {
+		try {
+		int pid=Integer.parseInt(id);
+		ProductBean bean=dao.findProduct(pid);
+		if(bean.getProductId()!=0)
+		{
+			return bean;
+		}
+		else
+		{
+			return null;
+		}
+		
+		}
+		catch (Exception e) {
+			
+			throw new ProductException("Prouct Id has only numbers....");
+		}
+	}
+
+}

@@ -1,0 +1,49 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.parallel.forestrymanagement.dao.ProductDAO;
+import com.parallel.forestrymanagement.dto.ProductBean;
+
+@Repository
+public class ProductServicesImpl implements ProductServices{
+	@Autowired
+	public ProductDAO dao;
+	@Override
+	public boolean addProducts(ProductBean bean) {
+		if(dao.findProduct(bean.getProductId()).getProductId()==0)
+		{
+			dao.addProducts(bean);
+			return true;
+		}
+		
+		return false;
+	}
+
+	@Override
+	public boolean updateProduct(String name, String qty) {
+		if(dao.findProduct1(name).getProductId()!=0)
+		{
+			ProductBean bean=new ProductBean();
+			try {
+				bean.setAvaliableqty(Integer.parseInt(qty));
+				dao.updateProduct(bean, bean.getProductId());
+				return true;
+			} catch (NumberFormatException e) {
+				return false;
+			}
+		}
+		
+		return false;
+	}
+
+	@Override
+	public List<ProductBean> seeAllProducts() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

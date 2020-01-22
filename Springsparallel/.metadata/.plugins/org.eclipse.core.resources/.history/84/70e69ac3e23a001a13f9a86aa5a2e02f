@@ -1,0 +1,47 @@
+package com.parallel.forestrymanagement.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+import com.parallel.forestrymanagement.dto.LoginResponse;
+import com.parallel.forestrymanagement.services.LoginServices;
+@CrossOrigin(origins = "*",allowedHeaders = "*" , allowCredentials = "true")
+@Controller
+public class LoginController {
+
+	
+	@Autowired
+	LoginServices loginServices;
+	@PostMapping(path = "/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public LoginResponse auth(@RequestBody LoginDetailsBean bean)
+	{
+		LoginResponse loginResponse=new LoginResponse();
+
+		LoginDetailsBean bean2;
+		try {
+			bean2 = loginServices.auth(bean);
+			if(bean2.getType()==1) {
+				loginResponse.setStatusCode(200);
+				loginResponse.setMessage("client");
+				loginResponse.setDiscription("Client Login Successfull");
+			}
+			else if (bean2.getType()==2) {
+				loginResponse.setStatusCode(200);
+				loginResponse.setMessage("admin");
+				loginResponse.setDiscription("Admin Login Successfull");
+				return loginResponse;
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			loginResponse.setStatusCode(401);
+			loginResponse.setMessage("error");
+			loginResponse.setDiscription("Error");
+		}
+		return loginResponse;
+	}
+}

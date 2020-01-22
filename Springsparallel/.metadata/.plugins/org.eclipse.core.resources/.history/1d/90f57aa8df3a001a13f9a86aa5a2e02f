@@ -1,0 +1,35 @@
+package com.parallel.forestrymanagement.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+import com.parallel.forestrymanagement.dto.LoginResponse;
+import com.parallel.forestrymanagement.services.LoginServices;
+
+@Controller
+public class LoginController {
+
+	
+	@Autowired
+	LoginServices loginServices;
+	
+	public LoginResponse auth(@RequestBody LoginDetailsBean bean)
+	{
+		LoginResponse loginResponse=new LoginResponse();
+
+			
+			if(loginServices.auth(bean).getType()==1) {
+			loginResponse.setStatusCode(200);
+			loginResponse.setMessage("client");
+			loginResponse.setDiscription("Customer deleted");
+		}else {
+			loginResponse.setStatusCode(401);
+			loginResponse.setMessage("Failure");
+			loginResponse.setDiscription("Error");
+		}
+		return loginResponse;
+	}
+}
+}

@@ -1,0 +1,72 @@
+package stepdefinition;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.testng.Reporter;
+
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+
+public class StepBlue {
+
+	WebDriver driver;
+	Actions action=new Actions(driver);
+	@Before
+	public void open()
+	{
+		driver=new ChromeDriver();
+	}
+	
+//	//div/ul/li/a[text()='Kadas']
+	
+	@Given("^user enters url$")
+	public void user_enters_url() throws Throwable {
+
+		driver.get("https://www.bluestone.com/");
+	}
+
+	@When("^user search for kadas$")
+	public void user_search_for_kadas() throws Throwable {
+		Actions action=new Actions(driver);
+		action.moveToElement(driver.findElement(By.xpath("//li/a[text()='All Jewellery ']")));
+		Thread.sleep(4000);
+		action.click(driver.findElement(By.xpath("//div/ul/li/a[text()='Kadas']")));
+		
+		
+	}
+
+	@When("^user selects one item$")
+	public void user_selects_one_item() throws Throwable {
+		driver.findElement(By.id("pid_8966")).click();
+		driver.switchTo().window("The Alok Kada For Him | BlueStone.com");
+	
+	}
+
+	@When("^user clicks on Buy Now button$")
+	public void user_clicks_on_Buy_Now_button() throws Throwable {
+		driver.findElement(By.id("buy-now")).click();
+		
+	
+	}
+
+	@Then("^error message must be displayed$")
+	public void error_message_must_be_displayed() throws Throwable {
+		String msg=driver.findElement(By.className("formErrorContent")).getText();
+		Reporter.log(msg);
+		
+	
+	}
+
+	
+	
+	@After
+	public void close()
+	{
+		driver.close();
+	}
+}

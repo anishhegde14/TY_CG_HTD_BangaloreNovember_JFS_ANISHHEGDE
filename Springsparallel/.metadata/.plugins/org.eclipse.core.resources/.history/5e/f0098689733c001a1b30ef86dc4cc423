@@ -1,0 +1,35 @@
+package com.parallel.forestrymanagement.dto;
+
+import java.util.List;
+//POJO CLASS
+public class ClientResponse {
+private int statusCode;
+private String message;
+private String discription;
+private int id;
+private List<ClientBean> beans;
+public int getStatusCode() {
+	return statusCode;
+}
+public void setStatusCode(int statusCode) {
+	this.statusCode = statusCode;
+}
+public String getMessage() {
+	return message;
+}
+public void setMessage(String message) {
+	this.message = message;
+}
+public String getDiscription() {
+	return discription;
+}
+public void setDiscription(String discription) {
+	this.discription = discription;
+}
+public List<ClientBean> getBeans() {
+	return beans;
+}
+public void setBeans(List<ClientBean> beans) {
+	this.beans = beans;
+}
+}

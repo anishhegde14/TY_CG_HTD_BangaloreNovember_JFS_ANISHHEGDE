@@ -1,0 +1,120 @@
+package com.parallel.forestrymanagement.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+
+import com.parallel.forestrymanagement.dto.ClientBean;
+import com.parallel.forestrymanagement.dto.ClientResponse;
+import com.parallel.forestrymanagement.dto.ContractBean;
+import com.parallel.forestrymanagement.dto.ContractResponse;
+import com.parallel.forestrymanagement.services.ClientServices;
+
+import com.parallel.forestrymanagement.services.ContractServices;
+import com.parallel.forestrymanagement.services.LoginServices;
+
+@RestController
+public class AdminController {
+@Autowired
+public	ClientServices services;
+@Autowired
+public LoginServices loginServices;
+@Autowired
+public ContractServices contractServices;
+	@PostMapping(path = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ClientResponse addClient(@RequestBody ClientBean eBean) {
+		ClientResponse clientResponse=new  ClientResponse();
+		
+		if(services.addClient(eBean)) {
+			if(loginServices.addLoginCredentials(eBean)) {
+			clientResponse.setStatusCode(200);
+			clientResponse.setMessage("success");
+			clientResponse.setDiscription("Customer registered");
+		}}else {
+			clientResponse.setStatusCode(401);
+			clientResponse.setMessage("Failure");
+			clientResponse.setDiscription("Email already exist");
+		}
+		return clientResponse;
+	}
+	
+	@DeleteMapping(path = "/delete" ,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ClientResponse deleteClient(@RequestParam("id") String id)
+	{
+		ClientResponse clientResponse=new  ClientResponse();
+		boolean b=services.deleteClient(id);
+		System.out.println(b);
+		if(b) {
+			
+			if(loginServices.deleteLoginCredentials(id)) {
+			clientResponse.setStatusCode(200);
+			clientResponse.setMessage("success");
+			clientResponse.setDiscription("Customer deleted");
+		}}else {
+			clientResponse.setStatusCode(401);
+			clientResponse.setMessage("Failure");
+			clientResponse.setDiscription("Error");
+		}
+		return clientResponse;
+	}
+	
+	@GetMapping(path = "getall" , consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ClientResponse findAllClients()
+	{
+	List<ClientBean> list= services.getAllClient();
+	ClientResponse clientResponse=new ClientResponse();
+	if(!list.isEmpty()) {
+		clientResponse.setBeans(list);
+		
+	}else
+	{
+		clientResponse.setStatusCode(401);
+		clientResponse.setMessage("Failure");
+		clientResponse.setDiscription("Error");
+		
+	}
+	return clientResponse;
+	}
+
+	@PostMapping(path = "/update", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ClientResponse updateClient(@RequestBody ClientBean eBean) {
+		ClientResponse clientResponse=new  ClientResponse();
+		
+		if(services.updateClient(eBean)) {
+		
+			clientResponse.setStatusCode(200);
+			clientResponse.setMessage("success");
+			clientResponse.setDiscription("Customer updated");
+		}else {
+			clientResponse.setStatusCode(401);
+			clientResponse.setMessage("Failure");
+			clientResponse.setDiscription("Email already exist");
+		}
+		return clientResponse;
+	}
+	@PostMapping(path = "/seeallcontracts", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ContractResponse viewAllContracts() {
+		ContractResponse contractResponse=new ContractResponse();
+		List<ContractBean> list=contractServices.getAllContract();
+		if(list.isEmpty()) {
+			contractResponse.setBeans(list);
+			contractResponse.setStatusCode(200);
+			contractResponse.setMessage("success");
+			contractResponse.setDiscription("Customer updated");
+		}else {
+			contractResponse.setStatusCode(401);
+			contractResponse.setMessage("Failure");
+			contractResponse.setDiscription("Empty Sets");
+		}
+		return contractResponse;
+	}
+}

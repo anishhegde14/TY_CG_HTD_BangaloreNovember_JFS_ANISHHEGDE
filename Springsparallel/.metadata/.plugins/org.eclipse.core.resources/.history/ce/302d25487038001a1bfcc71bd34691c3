@@ -1,0 +1,45 @@
+package com.parallel.forestrymanagement.services;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.parallel.forestrymanagement.dao.LoginDao;
+import com.parallel.forestrymanagement.dto.ClientBean;
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+import com.parallel.forestrymanagement.repository.LoginRepository;
+
+@Service
+public class LoginServicesImpl implements LoginServices {
+
+	@Autowired
+	private LoginDao dao;
+	@Override
+	public boolean addLoginCredentials(ClientBean detailsBean)
+	{
+		LoginDetailsBean bean=new LoginDetailsBean();
+		bean.setEmail(detailsBean.getEmail());
+		bean.setPassword(detailsBean.getPassword());
+		bean.setId(detailsBean.getClientid());
+		bean.setType(1);
+		dao.addLoginCredentials(bean);
+		return true;
+	
+	}
+	@Override
+	public boolean deleteLoginCredentials(String id)
+	{
+		try {
+		int iD=Integer.parseInt(id);
+		repository.deleteById(iD);
+		return true;
+		}
+		catch (Exception e) {
+return false;		}
+	}
+	@Override
+	public LoginDetailsBean findLoginCredentials(int id) {
+		
+		if()
+		return false;
+	}
+}

@@ -1,0 +1,26 @@
+package com.capgemini.selenium.webdriver;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class ActiTimeTest {
+static {
+
+		
+		System.setProperty("webdriver.chrome.driver", "./driver/chromedriver.exe");
+
+	}
+public static void main(String[] args) {
+	
+	
+	WebDriver driver=new ChromeDriver();
+	driver.manage().timeouts().implicitlyWait(10, TimeUnit.MINUTES);
+	driver.get("https://demo.actitime.com/login.do");
+	driver.findElement(By.name("username")).sendKeys("admin");
+	driver.findElement(By.xpath("//*[@id=\"loginFormContainer\"]/tbody/tr[1]/td/table/tbody/tr[2]/td/input")).sendKeys("manager");
+	driver.findElement(By.id("loginButton")).click();
+}
+}

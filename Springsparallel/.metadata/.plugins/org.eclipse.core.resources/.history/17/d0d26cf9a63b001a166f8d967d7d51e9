@@ -1,0 +1,178 @@
+package com.parallel.forestrymanagement.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.parallel.forestrymanagement.dto.ContractBean;
+import com.parallel.forestrymanagement.dto.ContractResponse;
+import com.parallel.forestrymanagement.dto.ProductBean;
+import com.parallel.forestrymanagement.dto.ProductResponse;
+import com.parallel.forestrymanagement.services.ContractServices;
+import com.parallel.forestrymanagement.services.ProductServices;
+@CrossOrigin(origins = "*",allowedHeaders = "*" , allowCredentials = "true")
+@RestController
+public class ClientController {
+	@Autowired
+	public ContractServices services;
+	@Autowired
+	public ProductServices productServices;
+	@PostMapping(path = "/addcontract", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ContractResponse addContract(@RequestBody ContractBean eBean) {
+		ContractResponse contractResponse=new  ContractResponse();
+		
+		if(services.addContract(eBean)) {
+			contractResponse.setStatusCode(200);
+			contractResponse.setMessage("success");
+			contractResponse.setDiscription("Customer registered");
+		}else {
+			contractResponse.setStatusCode(401);
+			contractResponse.setMessage("Failure");
+			contractResponse.setDiscription("Email already exist");
+		}
+		return contractResponse;
+	}
+	
+	@DeleteMapping(path = "/deletecontract" ,produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ContractResponse deleteContract(@RequestParam("id") String id)
+	{
+		ContractResponse contractResponse=new  ContractResponse();
+		boolean b=services.deleteContract(id);
+		System.out.println(b);
+		if(b) {
+			
+			contractResponse.setStatusCode(200);
+			contractResponse.setMessage("success");
+			contractResponse.setDiscription("Customer deleted");
+		}else {
+			contractResponse.setStatusCode(401);
+			contractResponse.setMessage("Failure");
+			contractResponse.setDiscription("Error");
+		}
+		return contractResponse;
+	}
+	
+	@GetMapping(path = "getallcontract" , consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ContractResponse findAllContracts()
+	{
+	List<ContractBean> list= services.getAllContract();
+	ContractResponse contractResponse=new ContractResponse();
+	if(!list.isEmpty()) {
+		contractResponse.setBeans(list);
+		
+	}else
+	{
+		contractResponse.setStatusCode(401);
+		contractResponse.setMessage("Failure");
+		contractResponse.setDiscription("Error");
+		
+	}
+	return contractResponse;
+	}
+
+	@PostMapping(path = "/updatecontract", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ContractResponse updateContract(@RequestBody ContractBean eBean) {
+		ContractResponse clientResponse=new  ContractResponse();
+		
+		if(services.updateContractOfClient(eBean)) {
+		
+			clientResponse.setStatusCode(200);
+			clientResponse.setMessage("success");
+			clientResponse.setDiscription("Customer updated");
+		}else {
+			clientResponse.setStatusCode(401);
+			clientResponse.setMessage("Failure");
+			clientResponse.setDiscription("Email already exist");
+		}
+		return clientResponse;
+	}
+	@PostMapping(path = "/seeallcontractsofclient", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ContractResponse viewAllContracts(@RequestParam("id") String id) {
+		ContractResponse contractResponse=new ContractResponse();
+		List<ContractBean> list=services.getAllContractOfClient(id);
+		if(list.isEmpty()) {
+			contractResponse.setBeans(list);
+			contractResponse.setStatusCode(200);
+			contractResponse.setMessage("success");
+			contractResponse.setDiscription("Customer updated");
+		}else {
+			contractResponse.setStatusCode(401);
+			contractResponse.setMessage("Failure");
+			contractResponse.setDiscription("Empty Sets");
+		}
+		return contractResponse;
+	}
+	
+	@PostMapping(path = "/addproduct", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse addProduct(@RequestBody ProductBean eBean) {
+		ProductResponse productResponse=new  ProductResponse();
+		
+		if(productServices.addProducts(eBean)) {
+			productResponse.setStatusCode(200);
+			productResponse.setMessage("success");
+			productResponse.setDiscription("Customer registered");
+		}else {
+			productResponse.setStatusCode(401);
+			productResponse.setMessage("Failure");
+			productResponse.setDiscription("Email already exist");
+		}
+		return productResponse;
+	}
+	@PostMapping(path = "/updateproduct", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse updateProduct(@RequestParam("name") String name,@RequestParam("qty") String qty) {
+		ProductResponse productResponse=new  ProductResponse();
+		
+		if(productServices.updateProduct(name,qty)) {
+			productResponse.setStatusCode(200);
+			productResponse.setMessage("success");
+			productResponse.setDiscription("Customer registered");
+		}else {
+			productResponse.setStatusCode(401);
+			productResponse.setMessage("Failure");
+			productResponse.setDiscription("Email already exist");
+		}
+		return productResponse;
+	}
+	@GetMapping(path = "/seeallproduct", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse findAllProduct() {
+		ProductResponse productResponse=new  ProductResponse();
+		List<ProductBean> list=productServices.seeAllProducts();
+		if(list.isEmpty()){
+			productResponse.setBeans(list);
+			productResponse.setStatusCode(200);
+			productResponse.setMessage("success");
+			productResponse.setDiscription("List Of Customers");
+		}else {
+			productResponse.setStatusCode(401);
+			productResponse.setMessage("Failure");
+			productResponse.setDiscription("Somethig is wrong");
+		}
+		return productResponse;
+	}
+	@GetMapping(path = "/findproduct", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ProductResponse findProduct(@RequestParam("name") String id) {
+		ProductResponse productResponse=new  ProductResponse();
+		ProductBean bean=productServices.findProduct(id);
+		if(bean.getProductId()!=0) {
+			productResponse.setBean(bean);
+			productResponse.setStatusCode(200);
+			productResponse.setMessage("success");
+			productResponse.setDiscription("Customer registered");
+		}else {
+			productResponse.setStatusCode(401);
+			productResponse.setMessage("Failure");
+			productResponse.setDiscription("Email already exist");
+		}
+		return productResponse;
+	}
+
+}

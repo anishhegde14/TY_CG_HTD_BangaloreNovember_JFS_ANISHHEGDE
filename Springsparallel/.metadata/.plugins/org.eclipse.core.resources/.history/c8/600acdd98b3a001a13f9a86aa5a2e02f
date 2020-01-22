@@ -1,0 +1,85 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.parallel.forestrymanagement.dao.ClientDao;
+import com.parallel.forestrymanagement.dto.ClientBean;
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+import com.parallel.forestrymanagement.exception.CustomerException;
+@Repository
+public class ClientServicesImpl implements ClientServices{
+	@Autowired
+	public ClientDao dao;
+	LoginServices loginServices=new LoginServicesImpl();
+	@Override
+	public boolean addClient(ClientBean bean) {
+		LoginDetailsBean loginBean=loginServices.findCredentials(bean.getEmail());
+		bean.setClientid(loginBean.getId());
+		
+			
+		if(dao.addClient(bean))
+		{
+			return true;
+		}
+		
+		return true;
+	}
+
+	@Override
+	public boolean deleteClient(String id) {
+
+		
+		if(findClient(id).getClientid()!=0) {
+			try{
+				int idValue=Integer.parseInt(id);
+				if(dao.deleteClient(idValue)) {
+				
+			return true;}
+			}
+			catch (Exception e) {
+return false;			}
+			
+			}
+		else {
+			throw new CustomerException("Customer Not Found");
+		}
+		return false;
+	}
+
+	@Override
+	public boolean updateClient(ClientBean bean) {
+		if(findClient(String.valueOf(bean.getClientid())) != null){
+			if(dao.updateClient(bean)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public ClientBean findClient(String id) {
+		try{
+			int idValue=Integer.parseInt(id);
+			ClientBean bean=new ClientBean();
+			if(bean.getClientid()!=0) {
+				return bean;
+			}
+		}
+		catch (Exception e) {
+return null;
+		}
+		return null;
+	}
+
+
+	@Override
+	public List<ClientBean> getAllClient() {
+	
+		
+		return dao.getAllClient();
+	}
+
+}

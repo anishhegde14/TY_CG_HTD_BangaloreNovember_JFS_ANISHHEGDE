@@ -1,0 +1,69 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import com.parallel.forestrymanagement.dao.ContractorDAO;
+import com.parallel.forestrymanagement.dto.ContractBean;
+import com.parallel.forestrymanagement.exception.ContractException;
+@Repository
+public class ContractServicesImpl implements ContractServices{
+	@Autowired
+	ContractorDAO dao;
+	@Override
+	public boolean addContract(ContractBean bean) {
+		if(dao.findContract(bean.getContractno()).getContractno()==0) {
+			dao.addContract(bean);
+			return true;
+		}else
+		{
+			throw new ContractException("Contract Already Exists");
+					}
+		
+	}
+
+	@Override
+	public boolean deleteContract(String id) {
+		
+		try {
+			int id1=Integer.parseInt(id);
+			if(dao.findContract(id1).getContractno()!=0) {
+			dao.deleteContract(id1);
+			return true;
+		}else
+		{
+			throw new ContractException("Contract Doesn't Exists");
+					}
+	} catch (NumberFormatException e) {
+		throw new ContractException("Invalid input type,Please enter only numbers");
+	}
+		}
+
+	@Override
+	public boolean updateContract(ContractBean bean) {
+		if(dao.findContract(bean.getContractno()).getContractno()!=0) {
+			dao.updateContract(bean);
+			return true;
+		}else
+		{
+			throw new ContractException("Contract Doesn't Exists");
+					}
+	}
+
+	@Override
+	public ContractBean findContract(String id) {
+		int id1=Integer.parseInt(id);
+		ContractBean bean=dao.findContract(id1);
+		
+		return null;
+	}
+
+	@Override
+	public List<ContractBean> getAllContract() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

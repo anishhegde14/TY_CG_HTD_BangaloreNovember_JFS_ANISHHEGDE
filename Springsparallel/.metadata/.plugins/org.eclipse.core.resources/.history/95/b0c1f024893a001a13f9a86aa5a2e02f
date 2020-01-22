@@ -1,0 +1,68 @@
+package com.parallel.forestrymanagement.services;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
+
+import com.parallel.forestrymanagement.dto.ClientBean;
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+import com.parallel.forestrymanagement.exception.CustomerException;
+import com.parallel.forestrymanagement.repository.ClientRepository;
+@Service
+public class ClientServicesImpl implements ClientServices{
+	@Autowired
+	ClientServices clientServices;
+	@Autowired
+	LoginServices loginServices;
+	@Override
+	public boolean addClient(ClientBean bean) {
+		LoginDetailsBean loginBean=loginServices.findCredentials(bean.getEmail());
+//		loginServices.addLoginCredentials(detailsBean);
+		return true;
+	}
+
+	@Override
+	public boolean deleteClient(String id) {
+
+		
+		if(findClient(id).getClientid()!=0) {
+			try{
+				int idValue=Integer.parseInt(id);
+			return true;
+			}
+			catch (Exception e) {
+return false;			}
+			
+			}
+		else {
+			throw new CustomerException("Customer Not Found");
+		}
+	}
+
+	@Override
+	public boolean updateClient(ClientBean bean) {
+		return false;
+	}
+
+	@Override
+	public ClientBean findClient(String id) {
+		try{
+			int idValue=Integer.parseInt(id);
+		}
+		catch (Exception e) {
+return null;
+		}
+		return null;
+	}
+
+
+	@Override
+	public List<ClientBean> getAllClient() {
+	
+		
+		return list;
+	}
+
+}

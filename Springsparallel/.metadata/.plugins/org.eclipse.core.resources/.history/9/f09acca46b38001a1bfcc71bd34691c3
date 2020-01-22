@@ -1,0 +1,31 @@
+package com.parallel.forestrymanagement.dao;
+
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceUnit;
+
+import com.parallel.forestrymanagement.dto.LoginDetailsBean;
+
+public class LoginDaoImpl implements LoginDao{
+	@PersistenceUnit
+	private EntityManagerFactory entityManagerFactory;
+	@Override
+	public boolean addLoginCredentials(LoginDetailsBean bean) {
+
+		
+		return false;
+	}
+
+	@Override
+	public boolean deleteLoginCredentials(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean findLogin(int id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+
+}

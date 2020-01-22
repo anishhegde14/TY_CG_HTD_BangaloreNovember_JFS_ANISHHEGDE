@@ -1,0 +1,38 @@
+package stepdefinition;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.When;
+
+public class Step {
+
+	
+	WebDriver driver;
+	
+	@Given("^User navigate to login page$")
+	public void user_navigate_to_login_page() throws Throwable {
+		driver=new ChromeDriver();
+		driver.get("https://demo.actitime.com/login.do");
+	}
+
+	@When("^User enters username and password$")
+	public void user_enters_username_and_password() throws Throwable {
+		driver.findElement(By.name("username")).sendKeys("admin");
+		driver.findElement(By.xpath("//*[@id=\"loginFormContainer\"]/tbody/tr[1]/td/table/tbody/tr[2]/td/input")).sendKeys("manager");
+		driver.findElement(By.id("loginButton")).click();
+		throw new PendingException();
+	}
+
+	@Then("^Login should be Successfull$")
+	public void login_should_be_Successfull() throws Throwable {
+	    // Write code here that turns the phrase above into concrete actions
+	    throw new PendingException();
+	}
+
+	PASSED: feature(Login Action)
+	        Runs Cucumber Feature
+
+}
